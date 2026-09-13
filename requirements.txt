@@ -2,3 +2,5 @@ streamlit
 pandas
 supabase
 uuid
+Authlib
+requests
