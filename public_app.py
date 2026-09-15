@@ -27,7 +27,7 @@ else:
     with st.form("health_log_form"):
         date = st.date_input("日付を選択してください")
         condition = st.slider("今日の調子", 0, 10, 5, step=1)
-        sleep = st.slider("睡眠時間", 0.0, 24.0, 7.0, step=0.1, format="%.1f")
+        sleep = st.slider("睡眠時間(h)", 0.0, 12.0, 7.0, step=0.5, format="%.1f")
         weather = st.text_input("天気")
         headahce = st.radio(
             "頭痛の有無",
@@ -35,7 +35,7 @@ else:
             format_func=lambda x: "あり" if x else "なし",
             index=1,
         )
-        study = st.slider("勉強時間(分)", 0, 600, 60, step=1)
+        study = st.number_input("勉強時間(分)", min_value=0, value=0)
 
         submit_button = st.form_submit_button("記録を保存")
 
@@ -77,7 +77,7 @@ else:
             if df.empty:
                 st.info("該当するユーザーのデータがありません")
             else:
-                df["recode_date"] = pd.to_datetime(df["recode_date"])
+                df["recode_date"] = pd.to_datetime(df["recode_date"]).dt.strftime('%Y-%m-%d')
 
                 st.subheader("総勉強時間")
                 total_study = df["study_minutes"].sum()
@@ -91,7 +91,7 @@ else:
                 st.line_chart(df.set_index("recode_date")[["condition_score", "sleep_hours"]])
 
                 st.subheader("🗒️データ一覧表示")
-                st.dataframe(df, use_container_width=True)
+                st.dataframe(df[["recode_date", "condition_score", "sleep_hours", "weather", "headache", "study_minutes"]], use_container_width=True)
         except Exception as e:
             st.error(f"データ取得エラー: {e}")
 
