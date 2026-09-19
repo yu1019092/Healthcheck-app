@@ -24,8 +24,6 @@ components.html("""
 
 st.title("データベース連携健康管理アプリ")
 
-st.title("データベース連携健康管理アプリ")
-
 if not st.user.is_logged_in:
     st.warning("ログインしてください")
     if st.button("Googleでログイン"):
