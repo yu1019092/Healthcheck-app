@@ -28,7 +28,7 @@ else:
         date = st.date_input("日付を選択してください")
         condition = st.slider("今日の調子", 0, 10, 5, step=1)
         sleep = st.slider("睡眠時間(h)", 0.0, 12.0, 7.0, step=0.5, format="%.1f")
-        weather = st.text_input("天気")
+        weather = st.selectbox("天気",["晴れ", "くもり", "雨", "晴れのちくもり", "晴れのち雨", "くもりのち晴れ", "くもりのち雨", "雨のち晴れ", "雨のちくもり", "雷", "その他"])
         headahce = st.radio(
             "頭痛の有無",
             options=[True, False],
@@ -43,7 +43,7 @@ else:
     
         insert_data = {
             "user_id": user_uuid, 
-            "recode_date": str(date),
+            "record_date": str(date),
             "condition_score": condition,
             "sleep_hours": sleep,
             "weather": weather,
@@ -68,7 +68,7 @@ else:
                 supabase.table("health-log")
                 .select("*")
                 .eq("user_id", user_uuid)
-                .order("recode_date", desc=True)
+                .order("record_date", desc=True)
                 .execute()
                 )
 
@@ -88,10 +88,10 @@ else:
 
                 st.subheader("📈グラフ")
                 st.caption("体調スコア(0-10)と睡眠時間(h)の推移")
-                st.line_chart(df.set_index("recode_date")[["condition_score", "sleep_hours"]])
+                st.line_chart(df.set_index("record_date")[["condition_score", "sleep_hours"]])
 
                 st.subheader("🗒️データ一覧表示")
-                st.dataframe(df[["recode_date", "condition_score", "sleep_hours", "weather", "headache", "study_minutes"]], use_container_width=True)
+                st.dataframe(df[["record_date", "condition_score", "sleep_hours", "weather", "headache", "study_minutes"]], use_container_width=True)
         except Exception as e:
             st.error(f"データ取得エラー: {e}")
 
@@ -117,7 +117,7 @@ else:
                         supabase.table("health-log")
                         .delete()
                         .eq("user_id", user_uuid_val)
-                        .eq("recode_date", selected_date_str)
+                        .eq("record_date", selected_date_str)
                         .execute()
                     )
                     if res.data and len(res.data) > 0 :
