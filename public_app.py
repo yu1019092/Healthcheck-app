@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit.components.v1 as components  # ← コンポーネントをインポート
 import pandas as pd 
 from supabase import create_client, Client
 import uuid
@@ -11,16 +10,6 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 
 st.set_page_config(page_title="健康管理ダッシュボード", page_icon="🏥", layout="wide")
-
-
-components.html("""
-    <script>
-        var metaTitle = document.createElement('meta');
-        metaTitle.setAttribute('property', 'og:title');
-        metaTitle.content = '健康管理ダッシュボード';
-        window.parent.document.getElementsByTagName('head')[0].appendChild(metaTitle);
-    </script>
-""", height=0)
 
 st.title("データベース連携健康管理アプリ")
 
