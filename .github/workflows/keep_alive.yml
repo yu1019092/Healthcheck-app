@@ -2,14 +2,13 @@ name: Keep Streamlit App Alive
 
 on:
   schedule:
-    # 日本時間の毎日朝5時（UTC 20:00）に実行
+    # 日本時間 毎朝5時（UTC 20:00）に実行
     - cron: '0 20 * * *'
-  workflow_dispatch: # 手動実行用ボタンを追加
+  workflow_dispatch:
 
 jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Streamlit App
-        run: |
-          curl -s https://healthcheck-app-yu1019092a.streamlit.app/ > /dev/null
+      - name: Access Streamlit App
+        run: curl -s https://healthcheck-app-yu1019092a.streamlit.app/
