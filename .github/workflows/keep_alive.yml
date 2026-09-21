@@ -1,14 +1,18 @@
-name: Keep Streamlit App Alive
+name: Keep Streamlit Alive
 
 on:
   schedule:
-    # 日本時間 毎朝5時（UTC 20:00）に実行
-    - cron: '0 20 * * *'
-  workflow_dispatch:
+    # 6時間ごとに実行 (UTC)
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # 手動実行用ボタンを追加
 
 jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Access Streamlit App
-        run: curl -s https://healthcheck-app-yu1019092a.streamlit.app/
+      - name: Ping Streamlit App
+        run: |
+          # -L: リダイレクトを追跡
+          # -f: HTTPエラー(400以上)時に失敗として扱う
+          # -s: サイレントモード
+          curl -sL -f -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" https://healthcheck-app-yu1019092a.streamlit.app/ || echo "Ping failed"
