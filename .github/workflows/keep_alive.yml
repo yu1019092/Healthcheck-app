@@ -2,17 +2,22 @@ name: Keep Streamlit Alive
 
 on:
   schedule:
-    # 6時間ごとに実行 (UTC)
-    - cron: '0 */6 * * *'
-  workflow_dispatch: # 手動実行用ボタンを追加
+    # 日本時間 朝5:00（UTC 前日20:00）
+    - cron: '0 20 * * *'
+  workflow_dispatch:
 
 jobs:
-  ping:
+  keep-alive:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - name: Ping Streamlit App
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Make empty commit
         run: |
-          # -L: リダイレクトを追跡
-          # -f: HTTPエラー(400以上)時に失敗として扱う
-          # -s: サイレントモード
-          curl -sL -f -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" https://healthcheck-app-yu1019092a.streamlit.app/ || echo "Ping failed"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git commit --allow-empty -m "Chore: Keepalive commit to prevent Streamlit sleep"
+          git push
