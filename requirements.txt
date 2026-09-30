@@ -4,3 +4,4 @@ supabase
 uuid
 Authlib
 requests
+plotly
