@@ -77,6 +77,7 @@ else:
                 st.info("該当するユーザーのデータがありません")
             else:
                 df["record_date"] = pd.to_datetime(df["record_date"]).dt.strftime('%Y-%m-%d')
+                df["month"]= df["record_date"].dt.month
 
                 st.subheader("総勉強時間")
                 total_study = df["study_minutes"].sum()
@@ -88,6 +89,9 @@ else:
                 st.subheader("📈グラフ")
                 st.caption("体調スコア(0-10)と睡眠時間(h)の推移")
                 st.line_chart(df.set_index("record_date")[["condition_score", "sleep_hours"]])
+
+                month_ave = df.groupby("month")["condition_score"].mean().reset_index()
+                st.bar_chart(month_ave, x="month", y="condition_score")
 
                 st.subheader("🗒️データ一覧表示")
                 st.dataframe(df[["record_date", "condition_score", "sleep_hours", "weather", "headache", "study_minutes"]], use_container_width=True)
