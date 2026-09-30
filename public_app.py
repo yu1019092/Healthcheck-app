@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd 
 from supabase import create_client, Client
 import uuid
+import plotly.express as px
 
 SUPABASE_URL = st.secrets["supabase"]["url"]
 SUPABASE_KEY = st.secrets["supabase"]["key"]
@@ -78,7 +79,7 @@ else:
             else:
                 df["record_date"] = pd.to_datetime(df["record_date"])
                 df["month"]= df["record_date"].dt.month
-                df["record_date"] = pd.to_datetime(df["record_date"]).dt.strftime('%Y-%m-%d')
+        
                 
 
                 st.subheader("総勉強時間")
@@ -90,13 +91,44 @@ else:
 
                 st.subheader("📈グラフ")
                 st.caption("体調スコア(0-10)と睡眠時間(h)の推移")
-                st.line_chart(df.set_index("record_date")[["condition_score", "sleep_hours"]])
 
-                month_ave = df.groupby("month")["condition_score"].mean().reset_index()
-                st.bar_chart(month_ave, x="month", y="condition_score")
+                fig_line = px.line(
+                    df,
+                    x="record_date",
+                    y=["condition_score", "sleep_hours"],
+                    labels={"value": "スコア / 時間", "record_date": "日付", "variable": "項目"},
+                    title="体調、睡眠時間の日毎の推移"
+                )
+
+                fig_line.update_xaxes(dtick="M1", tickformat="%Y-%m-%d")
+                fig_line.update_layout(hovermode="x unified")
+
+                st.plotly_chart(fig_line, use_container_width=True)
+                
+                st.caption("月別平均体調スコア")
+                monthly_df = df.groupby("month")["condition_score"].mean().reset_index()
+                monthly_df["month_label"] = monthly_df["month"].astype(str) + "月"
+
+                fig_bar = px.bar(
+                    monthly_df,
+                    x="month_label",
+                    y="condition_score",
+                    text_auto=".1f",
+                    labels={"month_label": "月", "condition_score" : "平均体調スコア"},
+                    title="月毎の平均体調"
+                )
+
+                fig_bar.update_yaxes(range=[0,10])
+                fig_bar.update_traces(marker_color="#1f77b4")
+
+                st.plotly_chart(fig_bar, use_container_width=True)
 
                 st.subheader("🗒️データ一覧表示")
-                st.dataframe(df[["record_date", "condition_score", "sleep_hours", "weather", "headache", "study_minutes"]], use_container_width=True)
+
+                display_df = df.copy()
+                display_df["record_date"] = display_df["record_date"].dt.strftime('%Y-%m-%d')
+
+                st.dataframe(display_df[["record_date", "condition_score", "sleep_hours", "weather", "headache", "study_minutes"]], use_container_width=True)
         except Exception as e:
             st.error(f"データ取得エラー: {e}")
 
