@@ -76,8 +76,10 @@ else:
             if df.empty:
                 st.info("該当するユーザーのデータがありません")
             else:
-                df["record_date"] = pd.to_datetime(df["record_date"]).dt.strftime('%Y-%m-%d')
+                df["record_date"] = pd.to_datetime(df["record_date"])
                 df["month"]= df["record_date"].dt.month
+                df["record_date"] = pd.to_datetime(df["record_date"]).dt.strftime('%Y-%m-%d')
+                
 
                 st.subheader("総勉強時間")
                 total_study = df["study_minutes"].sum()
