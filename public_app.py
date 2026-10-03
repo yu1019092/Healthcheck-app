@@ -4,13 +4,20 @@ from supabase import create_client, Client
 import uuid
 import plotly.express as px
 
+st.set_page_config(page_title="健康管理ダッシュボード", page_icon="🏥", layout="wide")
+
+
+def load_css(file_name):
+    with open(file_name, "r", encoding="utf-8") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+load_css("style.css")
+
 SUPABASE_URL = st.secrets["supabase"]["url"]
 SUPABASE_KEY = st.secrets["supabase"]["key"]
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-
-st.set_page_config(page_title="健康管理ダッシュボード", page_icon="🏥", layout="wide")
 
 st.title("データベース連携健康管理アプリ")
 
