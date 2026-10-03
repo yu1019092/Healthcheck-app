@@ -6,3 +6,13 @@
 [data-testid="manage-app-button"]{
     display:none !important;
 }
+
+.block-container {
+    padding-top: 1rem !important;
+}
+
+@media (max-width: 768px) {
+    div[data-testid="stMarkdownContainer"] h1 {
+        font-size:20px !important;
+    }
+}
