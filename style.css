@@ -11,6 +11,26 @@
     padding-top: 1rem !important;
 }
 
+div[data-baseweb="slider"] div[role="slider"]{
+    background-color:#3B9AE1 !important;
+}
+
+div[data-baseweb="slider"] div[data-testid="stSliderTickBar"]{
+    background-color:#3B9AE1 !important;
+}
+
+div[data-baseweb="slider"] div[data-testid="stThumbValue"]{
+    background-color:#3B9AE1 !important;
+}
+
+div[role="radiogroup"] input[type="radio"]:checked + div{
+    border-color:#3B9AE1 !important;
+}
+
+div[role="radiogroup"] input[type="radio"]:checked + div > div {
+    background-color:#3B9AE1 !important;
+}
+
 @media (max-width: 768px) {
     div[data-testid="stMarkdownContainer"] h1 {
         font-size:20px !important;
