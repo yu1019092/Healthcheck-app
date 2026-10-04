@@ -185,16 +185,6 @@ else:
             if st.button("キャンセル"):
                 st.rerun()
 
-    st.markdown("""
-        <style>
-        div.stButton > button {
-            background-color: #ff4b4b !important;
-            color: white !important;
-            border: none !important;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-
     if st.button("選択した日付のデータを削除"):
         confirm_delete_dialog(str(delete_target_date), user_uuid)
 
