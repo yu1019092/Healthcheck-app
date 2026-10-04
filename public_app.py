@@ -31,6 +31,8 @@ else:
     st.write(f"メールアドレス: {st.user.email}")
     user_uuid = str(uuid.uuid5(uuid.NAMESPACE_DNS, st.user.email.strip()))
 
+    st.subheader("データの入力")
+
     with st.form("health_log_form"):
         date = st.date_input("日付を選択してください")
         condition = st.slider("今日の調子", 0, 10, 5, step=1)
