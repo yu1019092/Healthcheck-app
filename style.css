@@ -32,8 +32,9 @@ div.stFormSubmitButton > button:hover {
 }
 
 div[data-testid="stMarkdownContainer"] h1 {
-    background-color:darkblue;
+    background-color:#9fca99;
     color:white;
+    padding-left:10px;
 }
 
 @media (max-width: 768px) {
