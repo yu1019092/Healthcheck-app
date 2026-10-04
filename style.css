@@ -31,6 +31,11 @@ div.stFormSubmitButton > button:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2) !important;
 }
 
+div[data-testid="stMarkdownContainer"] h1 {
+    background-color:darkblue;
+    color:white;
+}
+
 @media (max-width: 768px) {
     div[data-testid="stMarkdownContainer"] h1 {
         font-size:20px !important;
