@@ -25,6 +25,12 @@ div.element-container:last-child div.stButton > button {
 
 }
 
+div.stButton > button:hover,
+div.stFormSubmitButton > button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
 @media (max-width: 768px) {
     div[data-testid="stMarkdownContainer"] h1 {
         font-size:20px !important;
