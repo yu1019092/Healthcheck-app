@@ -27,8 +27,11 @@ if not st.user.is_logged_in:
         st.login("google")
 
 else:
-    st.success(f"ようこそ、{st.user.name}さん！")
-    st.write(f"メールアドレス: {st.user.email}")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.success(f"ようこそ、{st.user.name}さん！")
+    with col2:   
+        st.write(f"メールアドレス: {st.user.email}")
     user_uuid = str(uuid.uuid5(uuid.NAMESPACE_DNS, st.user.email.strip()))
 
 

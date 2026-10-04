@@ -38,6 +38,12 @@ div[data-testid="stMarkdownContainer"] h1 {
     margin-bottom:10px;
 }
 
+div[data-testid="stAlertContainer"] {
+    float:left
+}
+
+
+
 @media (max-width: 768px) {
     div[data-testid="stMarkdownContainer"] h1 {
         font-size:20px !important;
