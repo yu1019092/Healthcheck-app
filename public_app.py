@@ -31,6 +31,8 @@ else:
     st.write(f"メールアドレス: {st.user.email}")
     user_uuid = str(uuid.uuid5(uuid.NAMESPACE_DNS, st.user.email.strip()))
 
+
+    st.divider()
     st.subheader("データの入力")
 
     with st.form("health_log_form"):
