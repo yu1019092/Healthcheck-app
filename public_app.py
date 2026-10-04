@@ -185,6 +185,18 @@ else:
             if st.button("キャンセル"):
                 st.rerun()
 
+    with st.container(key="delete_button_area"):
+        
+        st.markdown("""
+            <style>
+            div[data-testid="stVerticalBlock"]:has(> div[data-testid="stElementContainer"] [data-key="delete_button_area"]) div.stButton > button {
+                background-color: #ff4b4b !important;
+                color: white !important;
+                border: none !important;
+            }
+            </style>
+        """, unsafe_allow_html=True)
+
     if st.button("選択した日付のデータを削除"):
         confirm_delete_dialog(str(delete_target_date), user_uuid)
 
