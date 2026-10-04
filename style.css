@@ -42,9 +42,7 @@ div[data-testid="stAlertContainer"] {
     float:left
 }
 
-div[data-testid="stMarkdownContainer"] p {
-    padding:16px;
-}
+
 
 
 @media (max-width: 768px) {
