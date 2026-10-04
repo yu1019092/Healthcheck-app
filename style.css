@@ -11,24 +11,17 @@
     padding-top: 1rem !important;
 }
 
-div[data-baseweb="slider"] div[role="slider"]{
-    background-color:#3B9AE1 !important;
+div.stButton > button {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15) !important;
+    border-radius: 8px !important;
+    transition: all 0.2s ease !important;
 }
 
-div[data-baseweb="slider"] div[data-testid="stSliderTickBar"]{
-    background-color:#3B9AE1 !important;
-}
+div.stButton:last-of-type > button {
+    background-color:#ff4b4b !important;
+    color:white !important;
+    border:none !important;
 
-div[data-baseweb="slider"] div[data-testid="stThumbValue"]{
-    background-color:#3B9AE1 !important;
-}
-
-div[role="radiogroup"] input[type="radio"]:checked + div{
-    border-color:#3B9AE1 !important;
-}
-
-div[role="radiogroup"] input[type="radio"]:checked + div > div {
-    background-color:#3B9AE1 !important;
 }
 
 @media (max-width: 768px) {
