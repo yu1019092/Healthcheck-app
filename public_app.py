@@ -184,7 +184,7 @@ else:
             if st.button("キャンセル"):
                 st.rerun()
 
-    if st.button("選択した日付のデータを削除", type="primary"):
+    if st.button("選択した日付のデータを削除"):
         confirm_delete_dialog(str(delete_target_date), user_uuid)
 
 
