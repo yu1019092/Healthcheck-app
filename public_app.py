@@ -28,7 +28,7 @@ if not st.user.is_logged_in:
 
 else:
     
-    st.success(f"ようこそ、{st.user.name}さん！  メールアドレス: {st.user.email}")
+    st.success(f"ようこそ、{st.user.name}さん！     メールアドレス: {st.user.email}")
     
     user_uuid = str(uuid.uuid5(uuid.NAMESPACE_DNS, st.user.email.strip()))
 
