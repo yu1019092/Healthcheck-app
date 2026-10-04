@@ -18,12 +18,7 @@ div.stFormSubmitButton > button{
     transition: all 0.2s ease !important;
 }
 
-div.element-container:last-child div.stButton > button {
-    background-color:#ff4b4b !important;
-    color:white !important;
-    border:none !important;
 
-}
 
 div.stButton > button:hover,
 div.stFormSubmitButton > button:hover {
